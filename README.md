@@ -1,1 +1,1 @@
-<h1>API do projeto PinCat</h1>
+<h1>API do projeto PinCat.</h1>
