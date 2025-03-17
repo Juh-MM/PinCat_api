@@ -1,4 +1,4 @@
-const Foto = require('../modules/Foto');
+const Foto = require('../modules/Fotos');
 
 //Procurar uma foto nas fotos cadastradas
 exports.getAllFotos = async (req, res) => {

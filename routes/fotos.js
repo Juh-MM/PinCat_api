@@ -1,6 +1,6 @@
 const express = require('express');
 const routes = express.Router();
-const fotosController = require('../controller/fotosController')
+const fotosController = require('../controllers/fotosController')
 
 routes.get('/', fotosController.getAllFotos);
 
