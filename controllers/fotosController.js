@@ -3,8 +3,12 @@ const Foto = require('../modules/Fotos');
 //Procurar uma foto nas fotos cadastradas
 exports.getAllFotos = async (req, res) => {
     try {
-        const fotos = await Foto.find();
-        res.json(fotos);
+        res.sendFile(dataPath);
+
+        app.use(express.static(path.join(__dirname, 'public')));
+
+
+
     } catch(err) {
         res.status(500).json({ massage: err.massage});
     }
@@ -12,8 +16,8 @@ exports.getAllFotos = async (req, res) => {
 
 //Cadastrar uma foto
 exports.createFoto = async (req, res) => {
-    const {title, description, image_url} = req.body;
-    const newFoto = new Foto({title, description, image_url});
+    const {id, title, url, createAt} = req.body;
+    const newFoto = new Foto({id, title, url, createAt});
 
     try {
         const savedFoto = await newFoto.save();
@@ -22,6 +26,7 @@ exports.createFoto = async (req, res) => {
         res.status(400).json({massage: err.massage});
     }
 };
+
 
 //Atualizar uma publicação
 exports.updateFoto = async (req, res) =>{
@@ -37,7 +42,7 @@ exports.updateFoto = async (req, res) =>{
 exports.deleteFoto = async (req, res) =>{
     try {
         await Foto.findByIdAndDelete(req.params.id);
-        res.jsn({massage: 'Foto apagada!'})
+        res.json({massage: 'Foto apagada!'})
     } catch(err) {
         res.status(500).json({massage: err.massage});
     }

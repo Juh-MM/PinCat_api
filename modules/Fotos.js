@@ -1,10 +1,10 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const FotoSchema = new mongoose.Schema({
     id: {type: Number, require: true, unique: true},
     title: {type: String, required: false},
-    description: {type: String, required: false},
-    image_url: {type: String, required: true}
+    url: {type: String, required: true},
+    createAt: {type: Date, default: Date.now},
 });
 
 module.exports = mongoose.model('Foto', FotoSchema);
