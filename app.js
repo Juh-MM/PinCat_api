@@ -9,7 +9,7 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(express.static('public'));
 
-const dataPath = path.join(__dirname, 'fotos.json');
+const dataPath = path.join(__dirname, '..', 'fotos.json');
 
 const fotosRoute = require('./routes/fotos');
 app.use('/api/fotos', fotosRoute);

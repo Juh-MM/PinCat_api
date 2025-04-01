@@ -1,14 +1,12 @@
 const Foto = require('../modules/Fotos');
+const fs = require('fs');
 
 //Procurar uma foto nas fotos cadastradas
 exports.getAllFotos = async (req, res) => {
     try {
-        res.sendFile(dataPath);
-
-        app.use(express.static(path.join(__dirname, 'public')));
-
-
-
+        const rawData = fs.readFileSync(dataPath);
+        const fotos = JSON.parse(rawData);
+        res.json(fotos);
     } catch(err) {
         res.status(500).json({ massage: err.massage});
     }
