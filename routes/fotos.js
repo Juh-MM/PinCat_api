@@ -1,13 +1,13 @@
 const express = require('express');
-const routes = express.Router();
+const router = express.Router();
 const fotosController = require('../controllers/fotosController');
 
-routes.get('/', fotosController.getAllFotos);
+router.get('/', fotosController.getAllFotos);
 
-routes.post('/', fotosController.createFoto);
+router.post('/', fotosController.createFoto);
 
-routes.put('/:id', fotosController.updateFoto);
+router.put('/:id', fotosController.updateFoto);
 
-routes.delete('/:id', fotosController.deleteFoto);
+router.delete('/:id', fotosController.deleteFoto);
 
-module.exports = routes;
+module.exports = router;
