@@ -4,18 +4,17 @@ const fs = require('fs');
 //Procurar uma foto nas fotos cadastradas
 exports.getAllFotos = async (req, res) => {
     try {
-        const rawData = fs.readFileSync(dataPath);
-        const fotos = JSON.parse(rawData);
+        const fotos = await Foto.find()
         res.json(fotos);
     } catch(err) {
-        res.status(500).json({ massage: err.massage});
+        res.status(500).json({ message: err.message});
     }
 };
 
 //Cadastrar uma foto
 exports.createFoto = async (req, res) => {
     const {id, title, url, createAt} = req.body;
-    const newFoto = new Foto({id, title, url, createAt});
+    const newFoto = new Foto({id, title, url});
 
     try {
         const savedFoto = await newFoto.save();
