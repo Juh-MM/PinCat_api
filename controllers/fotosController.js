@@ -4,10 +4,20 @@ const fs = require('fs');
 //Procurar uma foto nas fotos cadastradas
 exports.getAllFotos = async (req, res) => {
     try {
-        const fotos = await Foto.find()
+        const { title } = req.query;
+
+        let fotos;
+
+        if (title) {
+            // Pesquisa parcial com regex
+            fotos = await Foto.find({ title: { $regex: title, $options: 'i' } });
+        } else {
+            fotos = await Foto.find();
+        }
+
         res.json(fotos);
     } catch(err) {
-        res.status(500).json({ message: err.message});
+        res.status(500).json({ message: err.message });
     }
 };
 
