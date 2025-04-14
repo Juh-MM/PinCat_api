@@ -13,17 +13,27 @@ exports.getAllFotos = async (req, res) => {
 
 //Cadastrar uma foto
 exports.createFoto = async (req, res) => {
-    const {id, title, url, createAt} = req.body;
-    const newFoto = new Foto({id, title, url});
-
     try {
+        if (req.file) {
+            imageUrl = `/uploads/${req.file.filename}`; // imagem via upload
+        } else if (req.body.url) {
+            imageUrl = req.body.url; // imagem via URL
+        } else {
+            return res.status(400).json({ message: 'É necessário enviar uma imagem ou uma URL.' });
+        }
+
+        const newFoto = new Foto({
+            id: req.body.id,
+            title: req.body.title,
+            url: imageUrl
+        });
+
         const savedFoto = await newFoto.save();
         res.status(201).json(savedFoto);
-    } catch(err) {
-        res.status(400).json({massage: err.massage});
+    } catch (err) {
+        res.status(400).json({ message: err.message });
     }
-};
-
+};          
 
 //Atualizar uma publicação
 exports.updateFoto = async (req, res) =>{
