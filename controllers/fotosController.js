@@ -21,6 +21,21 @@ exports.getAllFotos = async (req, res) => {
     }
 };
 
+exports.buscarPorTitulo = async (req, res) => {
+    try {
+      const { titulo } = req.query;
+  
+      const fotos = await Foto.find({
+        titulo: { $regex: titulo, $options: 'i' } //i = case insensitive
+      });
+  
+      res.json(fotos);
+    } catch (err) {
+      res.status(500).json({ error: 'Erro ao buscar fotos por título' });
+    }
+  };
+
+
 //Cadastrar uma foto
 exports.createFoto = async (req, res) => {
     try {

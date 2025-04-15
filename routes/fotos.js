@@ -4,6 +4,7 @@ const fotosController = require('../controllers/fotosController');
 const upload = require('../middlewares/upload');
 
 router.get('/', fotosController.getAllFotos);
+router.get('/buscar', fotosController.buscarPorTitulo);
 
 router.post('/', upload.single('imagem'), fotosController.createFoto);
 
